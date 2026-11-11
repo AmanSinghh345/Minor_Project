@@ -65,6 +65,23 @@ class VariationalQuantumClassifier(nn.Module):
         initial_weights = 0.01 * torch.randn(n_layers, n_qubits, dtype=torch.float32)
         self.weights = nn.Parameter(initial_weights)
 
+    def save(self, filepath: str):
+        """Saves model weights and architectural configuration to disk."""
+        torch.save({
+            "weights": self.weights.data,
+            "n_qubits": self.n_qubits,
+            "n_layers": self.n_layers,
+            "topology": self.topology,
+        }, filepath)
+
+    def load(self, filepath: str):
+        """Loads model weights and architecture from disk."""
+        checkpoint = torch.load(filepath, map_location="cpu")
+        self.n_qubits = checkpoint["n_qubits"]
+        self.n_layers = checkpoint["n_layers"]
+        self.topology = checkpoint["topology"]
+        self.weights = nn.Parameter(checkpoint["weights"])
+
     def _circuit(self, weights: torch.Tensor, features: torch.Tensor):
         """
         Quantum Circuit Definition:
