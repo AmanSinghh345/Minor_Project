@@ -14,7 +14,7 @@ This document catalogues all literature and technical references directly consul
 - **Verified DOI**: [10.1109/JIOT.2023.3300577](https://doi.org/10.1109/JIOT.2023.3300577)
 - **Verified Findings from Text**:
   1. **Architecture & Application** (Section V, pp. 3844–3847): Evaluates multiple quantum classification approaches ($UU^\dagger$, variational $UU^\dagger$, and QNN) across two energy datasets (TWTDUS and SDWTT18) related to IoT extreme environments, demonstrating high classification accuracy under ideal conditions.
-  2. **Noise Channel Sweep** (Section V-B.4, pp. 3849–3851): Investigates four quantum noise channels (bit-flip, phase-flip, depolarizing, and amplitude damping) by sweeping the noise probability parameter $\eta$ from 0 to 1 with step increments of 0.1 (Figs. 14 and 15).
+  2. **Five Noise Channels Benchmarked** (Section V-B.4, pp. 3849–3851): Investigates five quantum noise channels—**bit-flip, phase-flip, amplitude damping, phase damping, and depolarizing**—by sweeping the noise probability parameter $\eta$ from 0 to 1 with step increments of 0.1 (Figs. 14 and 15).
   3. **Differential Noise Degradation** (Section V-B.4, p. 3849): Observes that the bit-flip noise model exhibits a sharp decline in classification accuracy as $\eta$ increases, whereas depolarizing and amplitude damping noise show a gradual, monotonic downward accuracy trend with increasing noise parameter probability.
 - **Influence on This Project**:
   - Directly justifies benchmarking both depolarizing and amplitude damping channels to observe gradual performance degradation under simulated hardware noise.
@@ -26,10 +26,10 @@ This document catalogues all literature and technical references directly consul
 - **Verified DOI**: [10.1109/ACCESS.2021.3075492](https://doi.org/10.1109/ACCESS.2021.3075492)
 - **Verified Findings from Text**:
   1. **Noise Channel Implementation** (Section III-C, pp. 65133–65134, Equations 4–6): Models environmental noise during training using amplitude damping channels applied after each unitary gate via the PennyLane mixed-state simulator (`default.mixed`). Tested amplitude damping only.
-  2. **Depth vs. Robustness Saturation** (Section IV-C, pp. 65135–65137, Figs. 11 & 12): Studies the effect of circuit depth ($L \in [1, 10]$) on noise robustness; finds that increasing depth from 1 to 3 layers provides the sharpest robustness improvements during training, but this robustness benefit saturates as additional layers are added.
+  2. **Depth vs. Performance & Noise Stability** (Abstract, Section IV-C & Conclusion, pp. 65127, 65135–65137): Analyzes the effect of circuit depth ($L \in [1, 10]$) on classification performance and training stability under noise; finds that the sharpest classification performance improvements occur at 1–3 layers and that higher depth provides more stable training as noise magnitude increases, though performance improvements saturate as more layers are added.
   3. **MNIST Binary Classification Breakdown** (Section IV-D, pp. 65136–65137): On a binary MNIST classification task (digits 0 and 1) using a single-layer single-qubit architecture, good performance is maintained under low noise, but the model fails to converge once the amplitude damping parameter exceeds $\lambda = 0.3$.
 - **Influence on This Project**:
-  - Motivates evaluating shallow circuit depths ($L \in \{1, 2, 3\}$) to examine how layer depth affects noise sensitivity.
+  - Motivates evaluating shallow circuit depths ($L \in \{1, 2, 3\}$) to examine how layer depth affects noise sensitivity and performance trade-offs.
   - Provides mathematical Kraus formulations for the amplitude damping channel: $K_0 = \begin{bmatrix} 1 & 0 \\ 0 & \sqrt{1-\gamma} \end{bmatrix}$, $K_1 = \begin{bmatrix} 0 & \sqrt{\gamma} \\ 0 & 0 \end{bmatrix}$.
 
 ---
@@ -42,7 +42,7 @@ This document catalogues all literature and technical references directly consul
   2. **Encoding Performance Metrics** (Section IV, Table 2 & Table 3, pp. 3711–3713): Reports that Amplitude Encoding VQC achieves 98.40% testing accuracy on the synthetic dataset (at depth 5, 100 epochs), 67.30% on Sonar, and 74.50% on Diabetes.
   3. **Impact of Encoding Strategy** (Section IV-A & IV-C, pp. 3712–3714): Concludes that Amplitude Encoding substantially outperforms Basis Encoding on the synthetic and diabetes datasets, establishing that the choice of input encoding directly impacts classification accuracy and circuit resource overhead.
 - **Influence on This Project**:
-  - Highlights the paramount importance of data encoding in VQCs. This influenced our choice of angle encoding with PCA-reduced features as a compact, constant-depth alternative to multi-qubit basis or amplitude encoding circuits.
+  - Highlights the critical importance of data encoding in VQCs. This influenced our choice of angle encoding with PCA-reduced features as a compact, constant-depth alternative to multi-qubit basis or amplitude encoding circuits.
 
 ---
 
@@ -50,11 +50,11 @@ This document catalogues all literature and technical references directly consul
 - **Full Citation**: Sohrab Sajadimanesh, Hanieh Aghaee Rad, Jean Paul Latyr Faye, and Ehsan Atoofian. *"NR-QNN: Noise-Resilient Quantum Neural Network."* *IEEE Access*, vol. 13, pp. 38550–38562, March 2025.
 - **Verified DOI**: [10.1109/ACCESS.2025.3546956](https://doi.org/10.1109/ACCESS.2025.3546956)
 - **Verified Findings from Text**:
-  1. **Two-Stage Noise Mitigation** (Abstract & Section III, pp. 38550–38552): Proposes NR-QNN, which mitigates hardware noise during inference using two complementary techniques: **quantum pruning** and **sensitivity-aware qubit mapping**.
-  2. **Quantum Gate Pruning** (Section III-B, pp. 38555–38556): Identifies parameterized rotation gates whose rotation angle $|\theta|$ falls below a threshold and removes them, simplifying the circuit structure and reducing gate count and depth to minimize noise accumulation.
-  3. **Sensitivity-Aware Qubit Mapping** (Section III-C, pp. 38556–38557): Analyzes the non-uniform error rates across physical NISQ qubits and maps higher-sensitivity logical qubits to more reliable physical qubits.
+  1. **Two-Stage Noise Mitigation**: Proposes NR-QNN, which mitigates hardware noise during inference using two complementary techniques: **quantum pruning** and **sensitivity-aware qubit mapping**.
+  2. **Quantum Gate Pruning**: Identifies parameterized rotation gates whose rotation angle falls below a threshold and removes them, simplifying circuit structure and reducing gate count to minimize noise accumulation.
+  3. **Sensitivity-Aware Qubit Mapping**: Analyzes the non-uniform error profile across physical NISQ qubits and maps higher-sensitivity logical qubits to more reliable physical qubits.
 - **Influence on This Project**:
-  - Demonstrates that circuit complexity (gate count and circuit depth) directly determines noise accumulation on NISQ devices.
+  - Confirms that circuit complexity (gate count and circuit depth) directly determines noise accumulation on NISQ devices.
 
 ---
 
@@ -73,32 +73,30 @@ This document catalogues all literature and technical references directly consul
 ---
 
 ### Paper 6: Rahman et al. - Fine-Tuned VQC (IEEE COMPSAC 2024)
-- **Full Citation**: Md Abdur Rahman, Mst. Shapna Akter, Emily Miller, Bogdan Timofti, Hossain Shahriar, Mohammad Masum, and Fan Wu. *"Fine-tuned Variational Quantum Classifiers for Cyber Attacks Detection based on Parameterized Quantum Circuits and Optimizers."* *2024 IEEE 48th Annual Computers, Software, and Applications Conference (COMPSAC)*, pp. 1060–1065, 2024.
-- **Verified DOI**: [10.1109/COMPSAC61105.2024.00164](https://doi.org/10.1109/COMPSAC61105.2024.00164)
+- **Full Citation**: Md Abdur Rahman, Mst. Shapna Akter, Emily Miller, Bogdan Timofti, Hossain Shahriar, Mohammad Masum, and Fan Wu. *"Fine-tuned Variational Quantum Classifiers for Cyber Attacks Detection based on Parameterized Quantum Circuits and Optimizers."* *2024 IEEE 48th Annual Computers, Software, and Applications Conference (COMPSAC)*, pp. 1067–1072, 2024.
+- **Verified DOI**: [10.1109/COMPSAC61105.2024.00144](https://doi.org/10.1109/COMPSAC61105.2024.00144)
 - **Verified Findings from Text**:
-  1. **PQC & Optimizer Evaluation in Qiskit** (Section IV & V, pp. 1062–1064): Implements VQCs using IBM's Qiskit to evaluate parameterized quantum circuit architectures (`EfficientSU2` vs. `RealAmplitudes`) and classical derivative-free optimizers (`COBYLA` vs. `AQSD`) on network anomaly data.
-  2. **Superiority of EfficientSU2 + COBYLA** (Section V, Table on p. 1064): Demonstrates that `EfficientSU2` with `COBYLA` on 3 attributes achieves 90% test accuracy (93% training accuracy), whereas `AQSD` underperforms significantly, yielding only 46% test accuracy.
-  3. **Feature Reduction Speedup** (Section V, Table on p. 1064): Reducing the attribute set from 8 features to 3 features reduced training time under `EfficientSU2` and `COBYLA` from 1441 seconds down to 356 seconds.
+  1. **PQC & Optimizer Evaluation in Qiskit** (Section IV & V, pp. 1068–1070): Implements VQCs using IBM's Qiskit to evaluate parameterized quantum circuit architectures (`EfficientSU2` vs. `RealAmplitudes`) and classical derivative-free optimizers (`COBYLA` vs. `AQSD`) on network anomaly data.
+  2. **Superiority of EfficientSU2 + COBYLA** (Section V, Table on p. 1071): Demonstrates that `EfficientSU2` with `COBYLA` on 3 attributes achieves 90% test accuracy (93% training accuracy), whereas `AQSD` underperforms significantly, yielding only 46% test accuracy.
+  3. **Feature Reduction Speedup** (Section V, Table on p. 1071): Reducing the attribute set from 8 features to 3 features reduced training time under `EfficientSU2` and `COBYLA` from 1441 seconds down to 356 seconds.
 - **Influence on This Project**:
   - Confirms that reducing input feature dimensionality drastically speeds up quantum optimization.
   - *Distinction*: Rahman et al. used derivative-free COBYLA in Qiskit. In our project, we deliberately choose gradient-based Adam in PyTorch via PennyLane parameter-shift gradients (see Author's Design Choices below).
 
 ---
 
-## 2. Hardware Error Rates: IBM Quantum Calibration Data
+## 2. Hardware Error Rates: IBM Quantum Calibration Regimes
 
-- **Source**: IBM Quantum Platform compute resources & Qiskit Runtime processor documentation:
-  - Link: [IBM Quantum Processor Types & Calibration Metrics](https://docs.quantum.ibm.com/guides/processor-types)
-  - Link: [IBM Quantum Compute Resources](https://quantum.ibm.com/)
-- **Verified Hardware Figures**:
-  - **Single-Qubit Gate Error (Median $SX$ Error)**: Typically $2.0 \times 10^{-4}$ to $5.0 \times 10^{-4}$ ($0.02\% - 0.05\%$) on modern Heron and Eagle processors.
-  - **Two-Qubit Gate Error (Median 2Q / CNOT / CZ / ECR Error)**: Typically $2.0 \times 10^{-3}$ to $8.0 \times 10^{-3}$ ($0.2\% - 0.8\%$) on modern architectures (e.g., Heron), and $1.0 \times 10^{-2}$ to $1.5 \times 10^{-2}$ ($1.0\% - 1.5\%$) on earlier Falcon/Eagle architectures.
-  - **Readout Error**: Typically $1.0 \times 10^{-2}$ to $2.5 \times 10^{-2}$ ($1\% - 2.5\%$).
+- **Reference Documentation**: IBM Quantum Platform compute resources & Qiskit Runtime processor documentation ([IBM Processor Types Documentation](https://docs.quantum.ibm.com/guides/processor-types)).
+- **Calibration Figures (Typical Published Values, Not Directly Verified Against Live Backend Calibration)**:
+  - *Single-Qubit Gate Error (SX error)*: Typically $2.0 \times 10^{-4}$ to $5.0 \times 10^{-4}$ ($0.02\% - 0.05\%$).
+  - *Two-Qubit Gate Error (CNOT / CZ / ECR)*: Typically $2.0 \times 10^{-3}$ to $8.0 \times 10^{-3}$ ($0.2\% - 0.8\%$) on recent architectures, and $1.0 \times 10^{-2}$ to $1.5 \times 10^{-2}$ ($1.0\% - 1.5\%$) on earlier architectures.
+  - *Readout Error*: Typically $1.0 \times 10^{-2}$ to $2.5 \times 10^{-2}$ ($1\% - 2.5\%$).
 - **Direct Justification for Our Sweep Range**:
-  - Our selected noise rate sweep: `[0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05]` ($0\%$ to $5\%$) directly spans this real-world operational regime:
-    - `0.001` ($0.1\%$) represents near-ideal two-qubit hardware performance.
-    - `0.005`–`0.01` ($0.5\% - 1.0\%$) represents typical physical CNOT/ECR gate error rates.
-    - `0.02`–`0.05` ($2.0\% - 5.0\%$) represents degraded or unmitigated multi-gate noise accumulation.
+  - Our selected noise rate sweep: `[0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05]` ($0\%$ to $5\%$) directly spans this practical operational regime:
+    - `0.001` ($0.1\%$) represents low-noise hardware performance.
+    - `0.005`–`0.01` ($0.5\% - 1.0\%$) represents typical physical two-qubit gate error rates.
+    - `0.02`–`0.05` ($2.0\% - 5.0\%$) captures higher unmitigated multi-gate noise accumulation.
 
 ---
 

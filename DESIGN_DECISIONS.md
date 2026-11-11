@@ -23,7 +23,7 @@ This document details every major design decision made in this project. For each
 - **Evidence / Justification**:
   - The top 4 PCA components capture **60.04%** of the total variance across PneumoniaMNIST images.
   - Fitting strictly on training data prevents test data leakage.
-  - Rahman et al. (COMPSAC 2024, p. 1064) demonstrated that reducing input feature dimensionality drastically reduces quantum optimization time (e.g. from 1441 s to 356 s).
+  - Rahman et al. (COMPSAC 2024, pp. 1067–1072) demonstrated that reducing input feature dimensionality drastically reduces quantum optimization time (e.g. from 1441 s down to 356 s).
 
 ---
 
@@ -55,7 +55,7 @@ This document details every major design decision made in this project. For each
 - **Alternatives Considered**:
   - *Deep circuits ($L \ge 5$)*: Substantially increases two-qubit gate counts and circuit depth, accelerating noise accumulation on NISQ simulators.
 - **Evidence / Justification**:
-  - Easom-McCaldin et al. (IEEE Access 2021, pp. 65135–65137) demonstrated that the sharpest robustness improvements against noise occur between 1 and 3 layers, after which robustness benefits saturate.
+  - Easom-McCaldin et al. (IEEE Access 2021, pp. 65127, 65135–65137) reported that the sharpest classification performance improvements occur at 1–3 layers and that increased depth provides more stable training as noise magnitude increases, though performance gains saturate thereafter.
   - Keeping $L \in \{1, 2, 3\}$ enables clear tracking of the depth-vs-noise trade-off.
 
 ---
@@ -66,7 +66,7 @@ This document details every major design decision made in this project. For each
   - *Circular*: CNOT(0,1), CNOT(1,2), CNOT(2,3), CNOT(3,0) $\rightarrow 4$ two-qubit gates per layer.
 - **Author's Hypothesis & Rationale**:
   - This is the **author's own independent design hypothesis**, not a finding from a prior paper.
-  - Verified IBM Quantum calibration data shows that two-qubit entangling gates have an error rate an order of magnitude higher ($0.2\% - 1.5\%$) than single-qubit gates ($0.02\% - 0.05\%$).
+  - Typical published superconducting QPU calibration data shows that two-qubit entangling gates have an error rate an order of magnitude higher ($0.2\% - 1.5\%$) than single-qubit gates ($0.02\% - 0.05\%$).
   - Circular topology adds an extra CNOT (closing the loop from qubit 3 back to qubit 0). We hypothesize that circular topology will suffer greater cumulative accuracy degradation under noise than linear topology, particularly under depolarizing noise.
 
 ---
@@ -76,9 +76,9 @@ This document details every major design decision made in this project. For each
 - **Alternatives Considered**:
   - *Coarse macro-sweep ($0\%, 25\%, 50\%, 100\%$)*: Fails to capture the practical operating regime of NISQ hardware.
 - **Evidence / Justification**:
-  - Verified against IBM Quantum processor calibration data (IBM Heron, Eagle, Falcon):
-    - Median single-qubit error: $0.02\% - 0.05\%$.
-    - Median two-qubit error (CNOT / CZ / ECR): $0.2\% - 1.5\%$.
+  - Grounded by typical published IBM Quantum processor calibration regimes:
+    - Median single-qubit error: typical range $0.02\% - 0.05\%$.
+    - Median two-qubit error (CNOT / CZ / ECR): typical range $0.2\% - 1.5\%$.
   - Our micro-sweep directly straddles this physical operating regime, enabling identification of realistic crossover points.
 
 ---
@@ -88,7 +88,7 @@ This document details every major design decision made in this project. For each
 - **Physical Rationale**:
   - *Depolarizing Channel*: Models symmetric environmental interaction (white noise), pulling the density matrix toward the maximally mixed state $\frac{I}{2}$. It isotropically shrinks the Bloch sphere.
   - *Amplitude Damping Channel*: Models non-symmetric energy relaxation ($T_1$ decay) caused by physical energy loss into the environment, driving qubits toward the ground state $|0\rangle$.
-  - Satpathy et al. (IEEE IoT J. 2024, p. 3849) observed monotonic accuracy degradation under both channels.
+  - Satpathy et al. (IEEE IoT J. 2024, p. 3849) benchmarked five noise models (bit-flip, phase-flip, amplitude damping, phase damping, and depolarizing), observing monotonic downward accuracy trends under both depolarizing and amplitude damping channels.
 
 ---
 
