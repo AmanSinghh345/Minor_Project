@@ -1,0 +1,1273 @@
+{
+  "baselines": {
+    "logistic_regression": {
+      "name": "Logistic Regression",
+      "parameters": 5,
+      "mean_accuracy": 0.8480000000000001,
+      "std_accuracy": 0.024899799195977446,
+      "lower_1std_bound": 0.8231002008040227,
+      "mean_f1": 0.8521949540644759,
+      "std_f1": 0.02352355250503882,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.81,
+          "f1": 0.8155339805825242
+        },
+        {
+          "seed": 43,
+          "accuracy": 0.88,
+          "f1": 0.88
+        },
+        {
+          "seed": 44,
+          "accuracy": 0.85,
+          "f1": 0.8598130841121495
+        },
+        {
+          "seed": 45,
+          "accuracy": 0.85,
+          "f1": 0.8571428571428571
+        },
+        {
+          "seed": 46,
+          "accuracy": 0.85,
+          "f1": 0.8484848484848485
+        }
+      ]
+    },
+    "small_mlp": {
+      "name": "Small MLP (4-8-1)",
+      "parameters": 49,
+      "mean_accuracy": 0.844,
+      "std_accuracy": 0.020736441353327695,
+      "mean_f1": 0.8506307700367106,
+      "std_f1": 0.01894114789870667,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.81,
+          "f1": 0.819047619047619
+        },
+        {
+          "seed": 43,
+          "accuracy": 0.86,
+          "f1": 0.8653846153846154
+        },
+        {
+          "seed": 44,
+          "accuracy": 0.84,
+          "f1": 0.8518518518518519
+        },
+        {
+          "seed": 45,
+          "accuracy": 0.86,
+          "f1": 0.8653846153846154
+        },
+        {
+          "seed": 46,
+          "accuracy": 0.85,
+          "f1": 0.8514851485148515
+        }
+      ]
+    }
+  },
+  "curves": [
+    {
+      "topology": "circular",
+      "layers": 1,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.796,
+          "accuracy_std": 0.035071355833500344,
+          "f1": 0.8068427068940783,
+          "f1_std": 0.030390305071387902,
+          "recall": 0.852,
+          "precision": 0.7721501976284585
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.7939999999999999,
+          "accuracy_std": 0.03646916505762091,
+          "f1": 0.8045426170468186,
+          "f1_std": 0.032136703815775464,
+          "recall": 0.8479999999999999,
+          "precision": 0.7712411067193676
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.79,
+          "accuracy_std": 0.04,
+          "f1": 0.7997769012202001,
+          "f1_std": 0.03237778496214976,
+          "recall": 0.836,
+          "precision": 0.7722299802452233
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.796,
+          "accuracy_std": 0.03435112807463533,
+          "f1": 0.8027242628882929,
+          "f1_std": 0.027927011736181964,
+          "recall": 0.8280000000000001,
+          "precision": 0.7837140298481126
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.79,
+          "accuracy_std": 0.03937003937005904,
+          "f1": 0.7919028952684115,
+          "f1_std": 0.038478110084057736,
+          "recall": 0.8,
+          "precision": 0.7895367237804213
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.796,
+          "accuracy_std": 0.039749213828703577,
+          "f1": 0.7760923820399364,
+          "f1_std": 0.05076270371564798,
+          "recall": 0.7120000000000001,
+          "precision": 0.8576681914093793
+        }
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 1,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.792,
+          "accuracy_std": 0.03701351104664347,
+          "f1": 0.8041202956155175,
+          "f1_std": 0.029104262133331404,
+          "recall": 0.852,
+          "precision": 0.7681493811352966
+        }
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 2,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.017888543819998277,
+          "f1": 0.8245686317799372,
+          "f1_std": 0.01686892411801213,
+          "recall": 0.8560000000000001,
+          "precision": 0.7971124757595345
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.82,
+          "accuracy_std": 0.021213203435596392,
+          "f1": 0.8261858824537918,
+          "f1_std": 0.0199159753120404,
+          "recall": 0.8560000000000001,
+          "precision": 0.8000345536816125
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.8240000000000001,
+          "accuracy_std": 0.02302172886644265,
+          "f1": 0.8294261580004155,
+          "f1_std": 0.021337867476454837,
+          "recall": 0.8560000000000001,
+          "precision": 0.8061568627450981
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.8220000000000001,
+          "accuracy_std": 0.019235384061671315,
+          "f1": 0.8266462646264626,
+          "f1_std": 0.015621841464620265,
+          "recall": 0.8480000000000001,
+          "precision": 0.8081176470588236
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.828,
+          "accuracy_std": 0.019235384061671322,
+          "f1": 0.8309165583224989,
+          "f1_std": 0.014924390596663721,
+          "recall": 0.844,
+          "precision": 0.8196985276869369
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.8140000000000001,
+          "accuracy_std": 0.033615472627943205,
+          "f1": 0.812491577151371,
+          "f1_std": 0.029704833040727754,
+          "recall": 0.804,
+          "precision": 0.8226783744230552
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.78,
+          "accuracy_std": 0.07810249675906655,
+          "f1": 0.7337053419162685,
+          "f1_std": 0.11774200967773922,
+          "recall": 0.6359999999999999,
+          "precision": 0.8927160937803522
+        }
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 2,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.017888543819998277,
+          "f1": 0.8245686317799372,
+          "f1_std": 0.01686892411801213,
+          "recall": 0.8560000000000001,
+          "precision": 0.7971124757595345
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.818,
+          "accuracy_std": 0.017888543819998277,
+          "f1": 0.8245686317799372,
+          "f1_std": 0.01686892411801213,
+          "recall": 0.8560000000000001,
+          "precision": 0.7971124757595345
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.818,
+          "accuracy_std": 0.017888543819998277,
+          "f1": 0.8245686317799372,
+          "f1_std": 0.01686892411801213,
+          "recall": 0.8560000000000001,
+          "precision": 0.7971124757595345
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.8200000000000001,
+          "accuracy_std": 0.019999999999999962,
+          "f1": 0.8262319981165709,
+          "f1_std": 0.01811021093717666,
+          "recall": 0.8560000000000001,
+          "precision": 0.8004065934065935
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8200000000000001,
+          "accuracy_std": 0.019999999999999962,
+          "f1": 0.8262319981165709,
+          "f1_std": 0.01811021093717666,
+          "recall": 0.8560000000000001,
+          "precision": 0.8004065934065935
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.8200000000000001,
+          "accuracy_std": 0.019999999999999962,
+          "f1": 0.8262319981165709,
+          "f1_std": 0.01811021093717666,
+          "recall": 0.8560000000000001,
+          "precision": 0.8004065934065935
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.017888543819998277,
+          "f1": 0.8245686317799372,
+          "f1_std": 0.01686892411801213,
+          "recall": 0.8560000000000001,
+          "precision": 0.7971124757595345
+        }
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 3,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.8514318126617558,
+          "f1_std": 0.03172794853686196,
+          "recall": 0.884,
+          "precision": 0.822932192083935
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.8514318126617558,
+          "f1_std": 0.03172794853686196,
+          "recall": 0.884,
+          "precision": 0.822932192083935
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.8514318126617558,
+          "f1_std": 0.03172794853686196,
+          "recall": 0.884,
+          "precision": 0.822932192083935
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.8480000000000001,
+          "accuracy_std": 0.031937438845342614,
+          "f1": 0.8531570388346992,
+          "f1_std": 0.03095408066981452,
+          "recall": 0.884,
+          "precision": 0.8265669438569848
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.844,
+          "accuracy_std": 0.03646916505762094,
+          "f1": 0.8478545333954729,
+          "f1_std": 0.033964304286719295,
+          "recall": 0.868,
+          "precision": 0.830226069811736
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.8280000000000001,
+          "accuracy_std": 0.03114482300479486,
+          "f1": 0.8252705110423557,
+          "f1_std": 0.03435592236489948,
+          "recall": 0.8160000000000001,
+          "precision": 0.8389946799878171
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.6639999999999999,
+          "accuracy_std": 0.10737783756436897,
+          "f1": 0.5009704789172515,
+          "f1_std": 0.23706141083233492,
+          "recall": 0.396,
+          "precision": 0.8629480899217741
+        }
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 3,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.8514318126617558,
+          "f1_std": 0.03172794853686196,
+          "recall": 0.884,
+          "precision": 0.822932192083935
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.8514318126617558,
+          "f1_std": 0.03172794853686196,
+          "recall": 0.884,
+          "precision": 0.822932192083935
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.844,
+          "accuracy_std": 0.03209361307176242,
+          "f1": 0.8498638393506633,
+          "f1_std": 0.03124129314930276,
+          "recall": 0.884,
+          "precision": 0.8202768248522967
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.844,
+          "accuracy_std": 0.03209361307176242,
+          "f1": 0.8498638393506633,
+          "f1_std": 0.03124129314930276,
+          "recall": 0.884,
+          "precision": 0.8202768248522967
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8460000000000001,
+          "accuracy_std": 0.030495901363953807,
+          "f1": 0.8525909216762002,
+          "f1_std": 0.02965792691644672,
+          "recall": 0.892,
+          "precision": 0.8195754716981133
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.842,
+          "accuracy_std": 0.02588435821108956,
+          "f1": 0.8487984443745178,
+          "f1_std": 0.02499930684355862,
+          "recall": 0.8880000000000001,
+          "precision": 0.8161852836008745
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.836,
+          "accuracy_std": 0.02880972058177584,
+          "f1": 0.8454691222435369,
+          "f1_std": 0.024438672531555492,
+          "recall": 0.8959999999999999,
+          "precision": 0.8044568354862494
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 1,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.614,
+          "accuracy_std": 0.0585662018573853,
+          "f1": 0.6218519426066595,
+          "f1_std": 0.0705519345689909,
+          "recall": 0.64,
+          "precision": 0.6059059987631417
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.612,
+          "accuracy_std": 0.058051701094799985,
+          "f1": 0.619251210005927,
+          "f1_std": 0.06959785303189456,
+          "recall": 0.6359999999999999,
+          "precision": 0.6044918573490002
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.616,
+          "accuracy_std": 0.05319774431308155,
+          "f1": 0.6215013571750726,
+          "f1_std": 0.06678790753178475,
+          "recall": 0.6359999999999999,
+          "precision": 0.6091850112062878
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.624,
+          "accuracy_std": 0.04159326868617084,
+          "f1": 0.6236141792120332,
+          "f1_std": 0.05715909017619257,
+          "recall": 0.6280000000000001,
+          "precision": 0.6212754838513657
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.624,
+          "accuracy_std": 0.03646916505762097,
+          "f1": 0.613239981630864,
+          "f1_std": 0.06212295014395425,
+          "recall": 0.6040000000000001,
+          "precision": 0.6269303549818966
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.6200000000000001,
+          "accuracy_std": 0.04847679857416329,
+          "f1": 0.5696440746422405,
+          "f1_std": 0.08414094731630758,
+          "recall": 0.512,
+          "precision": 0.6484417069048353
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 1,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.6159999999999999,
+          "accuracy_std": 0.06066300355241242,
+          "f1": 0.6243206430122318,
+          "f1_std": 0.07322748996634694,
+          "recall": 0.6440000000000001,
+          "precision": 0.6071591315952218
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 2,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.046043457732885346,
+          "f1": 0.8285642847109346,
+          "f1_std": 0.03653762712485357,
+          "recall": 0.8720000000000001,
+          "precision": 0.7931984126984127
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.818,
+          "accuracy_std": 0.046043457732885346,
+          "f1": 0.8285642847109346,
+          "f1_std": 0.03653762712485357,
+          "recall": 0.8720000000000001,
+          "precision": 0.7931984126984127
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.82,
+          "accuracy_std": 0.04301162633521312,
+          "f1": 0.8300180749497714,
+          "f1_std": 0.034073206571988514,
+          "recall": 0.8720000000000001,
+          "precision": 0.7957392475441477
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.82,
+          "accuracy_std": 0.045276925690687066,
+          "f1": 0.8280340136054422,
+          "f1_std": 0.03711955425093923,
+          "recall": 0.86,
+          "precision": 0.8014188660801563
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8140000000000001,
+          "accuracy_std": 0.047222875812470366,
+          "f1": 0.8207159752373302,
+          "f1_std": 0.03775445612461574,
+          "recall": 0.844,
+          "precision": 0.801980980012895
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.812,
+          "accuracy_std": 0.03633180424916989,
+          "f1": 0.8125814597068146,
+          "f1_std": 0.03133119882569879,
+          "recall": 0.8119999999999999,
+          "precision": 0.8157650279223297
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.7859999999999999,
+          "accuracy_std": 0.032093613071762415,
+          "f1": 0.7624839320925145,
+          "f1_std": 0.043252867879133614,
+          "recall": 0.692,
+          "precision": 0.8562679195032136
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 2,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.046043457732885346,
+          "f1": 0.8285642847109346,
+          "f1_std": 0.03653762712485357,
+          "recall": 0.8720000000000001,
+          "precision": 0.7931984126984127
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.818,
+          "accuracy_std": 0.046043457732885346,
+          "f1": 0.8285642847109346,
+          "f1_std": 0.03653762712485357,
+          "recall": 0.8720000000000001,
+          "precision": 0.7931984126984127
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.818,
+          "accuracy_std": 0.046043457732885346,
+          "f1": 0.8285642847109346,
+          "f1_std": 0.03653762712485357,
+          "recall": 0.8720000000000001,
+          "precision": 0.7931984126984127
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.8180000000000002,
+          "accuracy_std": 0.04494441010848845,
+          "f1": 0.8291156550178418,
+          "f1_std": 0.03582080662231459,
+          "recall": 0.876,
+          "precision": 0.7914116257549191
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8180000000000002,
+          "accuracy_std": 0.04494441010848845,
+          "f1": 0.8291156550178418,
+          "f1_std": 0.03582080662231459,
+          "recall": 0.876,
+          "precision": 0.7914116257549191
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.818,
+          "accuracy_std": 0.047644516998286375,
+          "f1": 0.8297198623773531,
+          "f1_std": 0.039514786603831564,
+          "recall": 0.8800000000000001,
+          "precision": 0.7885426781758875
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.8200000000000001,
+          "accuracy_std": 0.05099019513592784,
+          "f1": 0.8325245018792403,
+          "f1_std": 0.04264859764678072,
+          "recall": 0.8880000000000001,
+          "precision": 0.7876439610993049
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 3,
+      "noise_type": "amplitude_damping",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.8219999999999998,
+          "accuracy_std": 0.024899799195977453,
+          "f1": 0.8310590534536851,
+          "f1_std": 0.02351101944764642,
+          "recall": 0.876,
+          "precision": 0.7932016792296768
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.8299999999999998,
+          "accuracy_std": 0.022360679774997876,
+          "f1": 0.8373484606163698,
+          "f1_std": 0.02166013729431929,
+          "recall": 0.876,
+          "precision": 0.8046317829262277
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.8299999999999998,
+          "accuracy_std": 0.022360679774997876,
+          "f1": 0.8373484606163698,
+          "f1_std": 0.02166013729431929,
+          "recall": 0.876,
+          "precision": 0.8046317829262277
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.836,
+          "accuracy_std": 0.024083189157584582,
+          "f1": 0.8417359593102167,
+          "f1_std": 0.02214776335988492,
+          "recall": 0.8720000000000001,
+          "precision": 0.8162496670222341
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8240000000000001,
+          "accuracy_std": 0.026076809620810566,
+          "f1": 0.8274793777650921,
+          "f1_std": 0.024326635931474005,
+          "recall": 0.844,
+          "precision": 0.814462962962963
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.8160000000000001,
+          "accuracy_std": 0.02701851217221257,
+          "f1": 0.8156005503686389,
+          "f1_std": 0.029367591602265125,
+          "recall": 0.8160000000000001,
+          "precision": 0.8184618918452781
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.7879999999999999,
+          "accuracy_std": 0.031144823004794864,
+          "f1": 0.7549815222666021,
+          "f1_std": 0.04136254562581629,
+          "recall": 0.6559999999999999,
+          "precision": 0.8905731523378583
+        }
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 3,
+      "noise_type": "depolarizing",
+      "points": [
+        {
+          "rate": 0.0,
+          "rate_pct": 0.0,
+          "accuracy": 0.8219999999999998,
+          "accuracy_std": 0.024899799195977453,
+          "f1": 0.8310590534536851,
+          "f1_std": 0.02351101944764642,
+          "recall": 0.876,
+          "precision": 0.7932016792296768
+        },
+        {
+          "rate": 0.001,
+          "rate_pct": 0.1,
+          "accuracy": 0.8219999999999998,
+          "accuracy_std": 0.024899799195977453,
+          "f1": 0.8310590534536851,
+          "f1_std": 0.02351101944764642,
+          "recall": 0.876,
+          "precision": 0.7932016792296768
+        },
+        {
+          "rate": 0.002,
+          "rate_pct": 0.2,
+          "accuracy": 0.8219999999999998,
+          "accuracy_std": 0.024899799195977453,
+          "f1": 0.8310590534536851,
+          "f1_std": 0.02351101944764642,
+          "recall": 0.876,
+          "precision": 0.7932016792296768
+        },
+        {
+          "rate": 0.005,
+          "rate_pct": 0.5,
+          "accuracy": 0.82,
+          "accuracy_std": 0.025495097567963903,
+          "f1": 0.8294599672172488,
+          "f1_std": 0.024406039936883825,
+          "recall": 0.876,
+          "precision": 0.7901537837289512
+        },
+        {
+          "rate": 0.01,
+          "rate_pct": 1.0,
+          "accuracy": 0.8219999999999998,
+          "accuracy_std": 0.02280350850198274,
+          "f1": 0.8317751277848366,
+          "f1_std": 0.02072356037330144,
+          "recall": 0.8799999999999999,
+          "precision": 0.7909923581524312
+        },
+        {
+          "rate": 0.02,
+          "rate_pct": 2.0,
+          "accuracy": 0.8240000000000001,
+          "accuracy_std": 0.026076809620810566,
+          "f1": 0.8338256399908248,
+          "f1_std": 0.025077946747790944,
+          "recall": 0.884,
+          "precision": 0.7915309945357916
+        },
+        {
+          "rate": 0.05,
+          "rate_pct": 5.0,
+          "accuracy": 0.8220000000000001,
+          "accuracy_std": 0.02949576240750523,
+          "f1": 0.8323162060285607,
+          "f1_std": 0.027711717594023282,
+          "recall": 0.884,
+          "precision": 0.7888037218085188
+        }
+      ]
+    }
+  ],
+  "depol_flips": [
+    {
+      "topology": "circular",
+      "layers": 1,
+      "flips": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 2,
+      "flips": [
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        0.2,
+        0.2,
+        0.4
+      ]
+    },
+    {
+      "topology": "circular",
+      "layers": 3,
+      "flips": [
+        0.0,
+        0.0,
+        0.2,
+        0.2,
+        1.2,
+        1.6,
+        3.0
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 1,
+      "flips": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 2,
+      "flips": [
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        0.4,
+        0.8,
+        1.4
+      ]
+    },
+    {
+      "topology": "linear",
+      "layers": 3,
+      "flips": [
+        0.0,
+        0.0,
+        0.0,
+        0.2,
+        0.4,
+        1.0,
+        1.2
+      ]
+    }
+  ],
+  "readout_comparison": [
+    {
+      "depth": 1,
+      "topology": "linear",
+      "readout_0": 0.616,
+      "readout_0_std": 0.0607,
+      "readout_3": 0.778,
+      "readout_3_std": 0.0449,
+      "delta": 0.162
+    },
+    {
+      "depth": 1,
+      "topology": "circular",
+      "readout_0": 0.792,
+      "readout_0_std": 0.037,
+      "readout_3": 0.778,
+      "readout_3_std": 0.0449,
+      "delta": -0.014
+    },
+    {
+      "depth": 3,
+      "topology": "linear",
+      "readout_0": 0.822,
+      "readout_0_std": 0.0249,
+      "readout_3": 0.842,
+      "readout_3_std": 0.0327,
+      "delta": 0.02
+    },
+    {
+      "depth": 3,
+      "topology": "circular",
+      "readout_0": 0.846,
+      "readout_0_std": 0.0321,
+      "readout_3": 0.846,
+      "readout_3_std": 0.0241,
+      "delta": 0.0
+    }
+  ],
+  "samples": [
+    {
+      "id": 0,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        2.488,
+        2.3303,
+        1.0498,
+        1.084
+      ]
+    },
+    {
+      "id": 1,
+      "label": 0,
+      "class_name": "Normal",
+      "pca_features": [
+        1.541,
+        1.7827,
+        3.0249,
+        1.9362
+      ]
+    },
+    {
+      "id": 2,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        1.2842,
+        2.8245,
+        1.2991,
+        0.9447
+      ]
+    },
+    {
+      "id": 3,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        1.5233,
+        2.1076,
+        1.6962,
+        1.3475
+      ]
+    },
+    {
+      "id": 4,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        0.9803,
+        1.8657,
+        0.7862,
+        2.4351
+      ]
+    },
+    {
+      "id": 50,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        1.7515,
+        2.0817,
+        0.755,
+        1.8997
+      ]
+    },
+    {
+      "id": 51,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        2.1313,
+        2.0499,
+        2.1001,
+        1.3277
+      ]
+    },
+    {
+      "id": 52,
+      "label": 0,
+      "class_name": "Normal",
+      "pca_features": [
+        1.7807,
+        1.836,
+        2.3398,
+        2.3715
+      ]
+    },
+    {
+      "id": 53,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        1.8033,
+        2.5815,
+        0.9153,
+        1.3985
+      ]
+    },
+    {
+      "id": 54,
+      "label": 1,
+      "class_name": "Pneumonia",
+      "pca_features": [
+        1.2323,
+        1.9474,
+        2.5562,
+        2.2579
+      ]
+    }
+  ],
+  "viva_qa": [
+    {
+      "q": "Why did you limit the circuit to 4 qubits and 4 PCA features?",
+      "a": "Simulating noisy open quantum systems requires density matrix simulation where memory and computation scale as O(4^N). For N=4, rho is 16x16, permitting exact simulation of 420 sweep runs in minutes. 4 PCA features capture 60.04% of total variance across chest X-rays without data leakage."
+    },
+    {
+      "q": "How was data leakage strictly prevented during preprocessing?",
+      "a": "Both the PCA projection matrix and the MinMaxScaler feature transformation were fit STRICTLY on the 300 training samples. The test set was transformed using frozen parameters and clipped to [0, pi]."
+    },
+    {
+      "q": "Why Ry angle encoding into [0, pi] rather than amplitude encoding?",
+      "a": "Angle encoding requires constant circuit depth 1 (parallel single-qubit gates), minimizing gate exposure to noise before the ansatz begins. Amplitude encoding requires complex O(2^N) entangling circuits, introducing fatal errors on NISQ hardware. [0, pi] ensures a bijective mapping: 0 -> |0> and pi -> |1> without periodic wrapping."
+    },
+    {
+      "q": "What is the physical difference between Depolarizing and Amplitude Damping noise?",
+      "a": "Depolarizing noise is symmetric white noise that contracts the Bloch sphere isotropically toward I/2. Amplitude damping is asymmetric T1 energy relaxation that decays excited states |1> to ground state |0>, shifting expectation values toward +1."
+    },
+    {
+      "q": "Does depolarizing noise flip the sign of the prediction or only shrink it?",
+      "a": "It ONLY shrinks it! Tr(E(rho) Z0) = (1 - 4p/3) <Z0>. Since (1 - 4p/3) > 0 for all p <= 0.05, the sign of <Z0> never changes. At L=1, exactly 0.0 out of 100 test predictions flip across all seeds up to 5% noise."
+    },
+    {
+      "q": "Why does Amplitude Damping cause a catastrophic collapse in Recall?",
+      "a": "In our readout scheme, <Z0> = -1 corresponds to Pneumonia (class 1). Amplitude damping decays states into |0> (<Z0> = +1, Normal). This forces negative expectation values across the zero threshold to positive values, systematically misdiagnosing Pneumonia patients as Normal and causing massive False Negatives."
+    },
+    {
+      "q": "What happened with the initial Small MLP standard deviation of 15%?",
+      "a": "At lr=0.05, Seed 46 suffered dying ReLUs and saturated biases, collapsing to ln(2) loss and predicting class 1 for 98% of points (52% accuracy). Calibrating lr=0.01 with Kaiming normal initialization and 300 epochs eliminated the collapse, lowering std from 15.19% down to 2.07% (84.40% +/- 2.07%)."
+    },
+    {
+      "q": "Is the Linear vs Circular topology difference larger than seed-to-seed variance?",
+      "a": "At depth L=2, the clean difference is exactly 0.00%, which is much smaller than the seed spread (+/- 4.12%). At L=2 under 5% noise, the difference (+0.6%) is also within noise. However, at L=3 under 5% Amplitude Damping, Linear holds a +12.4% advantage (78.8% vs 66.4%), which is larger than the seed spread."
+    },
+    {
+      "q": "Why does reading out the LAST qubit eliminate the L=1 Linear gap?",
+      "a": "In Linear topology, CNOTs cascade from wire 0 down to wire 3. Qubit 0 acts only as a control and receives no information from qubits 1, 2, or 3. Measuring the last qubit (wire 3) accesses the full accumulated entanglement cascade, causing Linear L=1 accuracy to jump from 61.60% to 77.80%, exactly matching Circular L=1!"
+    },
+    {
+      "q": "What is the new crossover rate against Logistic Regression (84.80%)?",
+      "a": "Clean VQC reaches 84.60% at L=3 Circular (within 0.20% of LogReg). Using the 1-baseline-std lower bound (B - 1s = 82.31%), Circular L=3 stays within this tolerance up to 5.00% Depolarizing noise and up to 2.00% Amplitude Damping noise."
+    }
+  ]
+}

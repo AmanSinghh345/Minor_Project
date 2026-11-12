@@ -45,6 +45,7 @@ class SmallMLPPyTorch(nn.Module):
     Small non-linear Multi-Layer Perceptron:
     Input (4) -> Linear(4, 8) -> ReLU -> Linear(8, 1) -> Output Logit.
     Compact capacity chosen to match the parameter scale of NISQ VQCs.
+    Uses Kaiming/Xavier initialization to ensure stable convergence across all seeds.
     """
     def __init__(self, in_features: int = 4, hidden_dim: int = 8):
         super().__init__()
@@ -53,6 +54,11 @@ class SmallMLPPyTorch(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden_dim, 1),
         )
+        # Kaiming normal init for ReLU layer, Xavier normal for linear output layer
+        nn.init.kaiming_normal_(self.net[0].weight, nonlinearity="relu")
+        nn.init.zeros_(self.net[0].bias)
+        nn.init.xavier_normal_(self.net[2].weight)
+        nn.init.zeros_(self.net[2].bias)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.net(x)
@@ -112,10 +118,13 @@ def train_single_model(model: nn.Module, X_train: torch.Tensor, y_train: torch.T
     return metrics
 
 
-def train_and_evaluate_baseline(seed: int = 42, lr: float = 0.05, epochs: int = 250, verbose: bool = True):
+def train_and_evaluate_baseline(seed: int = 42, lr: float = 0.05, epochs: int = 250,
+                                lr_mlp: float = 0.01, epochs_mlp: int = 300, verbose: bool = True):
     """
     Trains both Classical Baselines (Logistic Regression and Small MLP)
     using the exact seed and preprocessed data.
+    Logistic Regression uses lr=0.05, epochs=250.
+    Small MLP uses calibrated lr_mlp=0.01, epochs_mlp=300 with Kaiming init.
 
     Returns:
         dict containing 'logreg' and 'mlp' metric dicts.
@@ -136,12 +145,12 @@ def train_and_evaluate_baseline(seed: int = 42, lr: float = 0.05, epochs: int = 
         lr=lr, epochs=epochs, model_name="Logistic Regression", verbose=verbose
     )
 
-    # 2. Small MLP
+    # 2. Small MLP (Calibrated lr=0.01, epochs=300, Kaiming init)
     set_seed(seed)
     mlp_model = SmallMLPPyTorch(in_features=4, hidden_dim=8)
     mlp_metrics = train_single_model(
         mlp_model, X_train, y_train, X_test, y_test,
-        lr=lr, epochs=epochs, model_name="Small MLP (4-8-1)", verbose=verbose
+        lr=lr_mlp, epochs=epochs_mlp, model_name="Small MLP (4-8-1)", verbose=verbose
     )
 
     return {

@@ -4,4 +4,10 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 papers/
+node_modules/
+dist/
+frontend/node_modules/
+frontend/dist/
+*.log
+
 

@@ -43,16 +43,20 @@ class VariationalQuantumClassifier(nn.Module):
         n_qubits: Number of quantum wires (fixed at 4 for our 4 PCA components).
         n_layers: Depth of the variational ansatz (1, 2, or 3 layers).
         topology: Entanglement scheme, either 'linear' or 'circular'.
+        readout_qubit: Wire index measured for expectation value (0 by default, or n_qubits-1 for last qubit).
         seed: Random seed for weight initialization.
     """
-    def __init__(self, n_qubits: int = 4, n_layers: int = 2, topology: str = "linear", seed: int = 42):
+    def __init__(self, n_qubits: int = 4, n_layers: int = 2, topology: str = "linear",
+                 readout_qubit: int = 0, seed: int = 42):
         super().__init__()
         assert topology in ["linear", "circular"], f"Topology must be 'linear' or 'circular', got {topology}"
         assert n_layers in [1, 2, 3], f"n_layers should be 1, 2, or 3, got {n_layers}"
+        assert 0 <= readout_qubit < n_qubits, f"readout_qubit must be in [0, {n_qubits-1}], got {readout_qubit}"
 
         self.n_qubits = n_qubits
         self.n_layers = n_layers
         self.topology = topology
+        self.readout_qubit = readout_qubit
 
         # Create PennyLane noise-free statevector simulation device
         self.dev = qml.device("default.qubit", wires=n_qubits)
@@ -72,6 +76,7 @@ class VariationalQuantumClassifier(nn.Module):
             "n_qubits": self.n_qubits,
             "n_layers": self.n_layers,
             "topology": self.topology,
+            "readout_qubit": self.readout_qubit,
         }, filepath)
 
     def load(self, filepath: str):
@@ -80,6 +85,7 @@ class VariationalQuantumClassifier(nn.Module):
         self.n_qubits = checkpoint["n_qubits"]
         self.n_layers = checkpoint["n_layers"]
         self.topology = checkpoint["topology"]
+        self.readout_qubit = checkpoint.get("readout_qubit", 0)
         self.weights = nn.Parameter(checkpoint["weights"])
 
     def _circuit(self, weights: torch.Tensor, features: torch.Tensor):
@@ -108,8 +114,8 @@ class VariationalQuantumClassifier(nn.Module):
             if self.topology == "circular":
                 qml.CNOT(wires=[self.n_qubits - 1, 0])
 
-        # Step 3: Measurement on readout qubit 0
-        return qml.expval(qml.PauliZ(0))
+        # Step 3: Measurement on specified readout qubit (default qubit 0, or last qubit)
+        return qml.expval(qml.PauliZ(self.readout_qubit))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -220,6 +226,7 @@ if __name__ == "__main__":
     parser.add_argument("--topology", type=str, default="circular", choices=["linear", "circular"], help="CNOT topology")
     parser.add_argument("--lr", type=float, default=0.05, help="Learning rate")
     parser.add_argument("--epochs", type=int, default=150, help="Training epochs")
+    parser.add_argument("--readout_qubit", type=int, default=0, help="Wire to measure (0 by default, 3 for last qubit)")
     args = parser.parse_args()
 
     run_stage2_demo(seed=args.seed, n_layers=args.layers, topology=args.topology, lr=args.lr, epochs=args.epochs)

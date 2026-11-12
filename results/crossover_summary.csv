@@ -1,0 +1,13 @@
+topology,layers,noise_type,clean_accuracy,logreg_mean,logreg_std,logreg_1std_bound,mlp_mean,mlp_std,crossover_logreg,crossover_mlp,highest_rate_within_1std_logreg
+circular,1,amplitude_damping,0.792,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+circular,1,depolarizing,0.792,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+circular,2,amplitude_damping,0.818,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,0.01
+circular,2,depolarizing,0.818,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+circular,3,amplitude_damping,0.8460000000000001,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.01,0.02
+circular,3,depolarizing,0.8460000000000001,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.002,0.05
+linear,1,amplitude_damping,0.616,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+linear,1,depolarizing,0.616,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+linear,2,amplitude_damping,0.818,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+linear,2,depolarizing,0.818,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,
+linear,3,amplitude_damping,0.8219999999999998,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,0.01
+linear,3,depolarizing,0.8219999999999998,0.848,0.0249,0.8231,0.844,0.0207,0.0,0.0,0.02
