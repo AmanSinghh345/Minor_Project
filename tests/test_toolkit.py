@@ -74,6 +74,28 @@ def test_iris_benchmark_loader():
     assert np.all(X_te >= -1e-7) and np.all(X_te <= np.pi + 1e-7)
 
 
+def test_ibm_hardware_backend():
+    from vqc_toolkit.noise.hardware_backend import (
+        make_hardware_vqc_qnode,
+        apply_hardware_readout_noise_and_mitigation,
+        PRESET_PROFILES
+    )
+    for profile in ["ideal_baseline", "ibm_eagle", "ibm_manila"]:
+        assert profile in PRESET_PROFILES
+        qnode, prof = make_hardware_vqc_qnode(profile_name=profile, n_qubits=4, n_layers=1, topology="linear")
+        inputs = np.array([0.5, 1.0, 1.5, 2.0])
+        weights = np.zeros((1, 4))
+        exp_z = float(qnode(inputs, weights))
+        assert -1.0 <= exp_z <= 1.0
+        
+        # Test REM mitigation
+        raw_prob = 0.75
+        noisy_prob = apply_hardware_readout_noise_and_mitigation(raw_prob, prof, mitigate=False)
+        mit_prob = apply_hardware_readout_noise_and_mitigation(raw_prob, prof, mitigate=True)
+        assert 0.0 <= noisy_prob <= 1.0
+        assert 0.0 <= mit_prob <= 1.0
+
+
 if __name__ == "__main__":
     test_kraus_completeness()
     test_readout_error_mitigation()
@@ -81,4 +103,5 @@ if __name__ == "__main__":
     test_noise_robustness_score()
     test_circuit_selection_rules()
     test_iris_benchmark_loader()
+    test_ibm_hardware_backend()
     print("All unit tests passed successfully!")
