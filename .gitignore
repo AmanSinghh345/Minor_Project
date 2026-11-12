@@ -11,5 +11,6 @@ frontend/dist/
 dashboard/node_modules/
 dashboard/dist/
 *.log
+~$*
 
 

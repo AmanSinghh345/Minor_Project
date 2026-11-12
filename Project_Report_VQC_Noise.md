@@ -1,6 +1,10 @@
 # National Institute of Technology Raipur
 ## Department of Information Technology
 
+<div align="center">
+  <img src="assets/nitrr_logo.png" alt="NIT Raipur Emblem" width="160" />
+</div>
+
 ### **Project Report**
 #### on
 # **Comparative Analysis of Variational Quantum Circuits under Hardware-Simulated Noise for Clinical Diagnostics**

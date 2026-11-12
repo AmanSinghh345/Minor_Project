@@ -26,6 +26,25 @@ def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
     tcMar = parse_xml(f'<w:tcMar {nsdecls("w")}><w:top w:w="{top}" w:type="dxa"/><w:bottom w:w="{bottom}" w:type="dxa"/><w:left w:w="{left}" w:type="dxa"/><w:right w:w="{right}" w:type="dxa"/></w:tcMar>')
     tcPr.append(tcMar)
 
+def add_page_borders(doc, color="000000", size="12", space="24"):
+    """
+    Adds formal academic page border around each page in every section.
+    color: hex color string (e.g. '000000' or '0E3952')
+    size: '12' = 1.5 pt (in 1/8 pt units)
+    space: '24' = 24 pt offset from page edge
+    """
+    for section in doc.sections:
+        sectPr = section._sectPr
+        for existing in sectPr.xpath('./w:pgBorders'):
+            sectPr.remove(existing)
+        borders_xml = f'''<w:pgBorders {nsdecls("w")} w:offsetFrom="page">
+            <w:top w:val="single" w:sz="{size}" w:space="{space}" w:color="{color}"/>
+            <w:left w:val="single" w:sz="{size}" w:space="{space}" w:color="{color}"/>
+            <w:bottom w:val="single" w:sz="{size}" w:space="{space}" w:color="{color}"/>
+            <w:right w:val="single" w:sz="{size}" w:space="{space}" w:color="{color}"/>
+        </w:pgBorders>'''
+        sectPr.append(parse_xml(borders_xml))
+
 def create_report():
     doc = Document()
 
@@ -45,31 +64,47 @@ def create_report():
     font.color.rgb = RGBColor(30, 41, 59)
 
     # =========================================================================
-    # PAGE 1: TITLE PAGE (Exact replica of Senior's Title Page)
+    # PAGE 1: TITLE PAGE (Exact replica of Senior's Title Page with NITRR Logo)
     # =========================================================================
     p_inst = doc.add_paragraph()
     p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run_inst = p_inst.add_run("National Institute of Technology Raipur\nDepartment of Information Technology\n\n")
+    p_inst.paragraph_format.space_before = Pt(0)
+    p_inst.paragraph_format.space_after = Pt(4)
+    run_inst = p_inst.add_run("National Institute of Technology Raipur\nDepartment of Information Technology")
     run_inst.font.name = 'Times New Roman'
-    run_inst.font.size = Pt(18)
+    run_inst.font.size = Pt(17)
     run_inst.font.bold = True
     run_inst.font.color.rgb = RGBColor(15, 23, 42)
+
+    # Institute Logo
+    p_logo = doc.add_paragraph()
+    p_logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_logo.paragraph_format.space_before = Pt(8)
+    p_logo.paragraph_format.space_after = Pt(8)
+    logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'nitrr_logo.png')
+    if os.path.exists(logo_path):
+        run_logo = p_logo.add_run()
+        run_logo.add_picture(logo_path, width=Inches(1.65))
 
     # Project Report On
     p_rep = doc.add_paragraph()
     p_rep.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_rep = p_rep.add_run("Project Report\non\n\n")
+    p_rep.paragraph_format.space_before = Pt(2)
+    p_rep.paragraph_format.space_after = Pt(4)
+    r_rep = p_rep.add_run("Project Report\non")
     r_rep.font.name = 'Times New Roman'
-    r_rep.font.size = Pt(15)
+    r_rep.font.size = Pt(14)
     r_rep.font.italic = True
     r_rep.font.color.rgb = RGBColor(71, 85, 105)
 
     # Project Title
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_title = p_title.add_run("Comparative Analysis of Variational Quantum Circuits under Hardware-Simulated Noise for Clinical Diagnostics\n\n\n")
+    p_title.paragraph_format.space_before = Pt(4)
+    p_title.paragraph_format.space_after = Pt(12)
+    r_title = p_title.add_run("Comparative Analysis of Variational Quantum Circuits under Hardware-Simulated Noise for Clinical Diagnostics")
     r_title.font.name = 'Times New Roman'
-    r_title.font.size = Pt(20)
+    r_title.font.size = Pt(18)
     r_title.font.bold = True
     r_title.font.color.rgb = RGBColor(14, 57, 82)
 
@@ -83,6 +118,7 @@ def create_report():
     # Left cell: Submitted by
     cell_sub = t_meta.cell(0, 0)
     p_sub = cell_sub.paragraphs[0]
+    p_sub.paragraph_format.line_spacing = 1.15
     p_sub.add_run("Submitted by:\n").bold = True
     p_sub.add_run("1. Aditya Soni (23118004)\n")
     p_sub.add_run("2. Aman Singh (23118008)\n")
@@ -93,13 +129,16 @@ def create_report():
     # Right cell: Guided by
     cell_gui = t_meta.cell(0, 1)
     p_gui = cell_gui.paragraphs[0]
+    p_gui.paragraph_format.line_spacing = 1.15
     p_gui.add_run("Guided by:\n").bold = True
     p_gui.add_run("Dr. Kapil Kumar Soni\nAssistant Professor\n")
     p_gui.runs[0].font.size = Pt(12)
     p_gui.runs[1].font.size = Pt(11)
 
     # Bottom academic credentials
-    p_bot = doc.add_paragraph("\n\n\nBranch: Information Technology\nCourse: B. Tech.\nSemester: 7 (Minor Project)")
+    p_bot = doc.add_paragraph("Branch: Information Technology\nCourse: B. Tech.\nSemester: 7 (Minor Project)")
+    p_bot.paragraph_format.space_before = Pt(14)
+    p_bot.paragraph_format.line_spacing = 1.15
     p_bot.alignment = WD_ALIGN_PARAGRAPH.LEFT
     for r in p_bot.runs:
         r.font.name = 'Times New Roman'
@@ -548,9 +587,22 @@ def create_report():
         run_r.font.size = Pt(10)
         run_r.font.color.rgb = RGBColor(51, 65, 85)
 
+    # Apply formal academic page border to all pages in all sections
+    add_page_borders(doc, color="000000", size="12", space="24")
+
     output_path = "Project_Report_VQC_Noise.docx"
     doc.save(output_path)
-    print(f"Successfully generated academic project report: {output_path}")
+    print(f"Successfully generated academic project report DOCX: {output_path}")
+
+    # Convert DOCX to PDF
+    pdf_path = "Project_Report_VQC_Noise.pdf"
+    print("Converting DOCX to PDF via docx2pdf...")
+    try:
+        from docx2pdf import convert
+        convert(output_path, pdf_path)
+        print(f"Successfully generated academic project report PDF: {pdf_path} ({os.path.getsize(pdf_path)} bytes)")
+    except Exception as e:
+        print(f"docx2pdf conversion note: {e}")
 
 if __name__ == "__main__":
     create_report()
