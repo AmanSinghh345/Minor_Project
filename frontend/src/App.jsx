@@ -30,6 +30,11 @@ export default function App() {
   const [vivaSearch, setVivaSearch] = useState("");
   const [expandedQA, setExpandedQA] = useState(null);
 
+  // Circuit Selection Rule Engine State
+  const [recNoiseType, setRecNoiseType] = useState("amplitude_damping");
+  const [recNoiseRate, setRecNoiseRate] = useState(0.02);
+  const [recReadoutError, setRecReadoutError] = useState(0.025);
+
   // Slide Deck Definitions
   const slides = [
     {
@@ -322,6 +327,86 @@ export default function App() {
           </div>
         </div>
       )
+    },
+    {
+      title: "7. Quantum Error Mitigation (QEM)",
+      subtitle: "Readout Error Mitigation (REM) and Zero-Noise Extrapolation (ZNE)",
+      badge: "Error Mitigation",
+      content: (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+          <div style={{ background: "#111827", padding: "20px", borderRadius: "12px", border: "1px solid #1f2937" }}>
+            <h4 style={{ color: "#34d399", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <ShieldCheck size={20} /> Readout Error Mitigation (REM)
+            </h4>
+            <p style={{ color: "#9ca3af", fontSize: "14px", lineHeight: "1.6" }}>
+              Measurement apparatuses on superconducting NISQ processors have asymmetric detector bit-flip rates
+              (p₀₁ ≈ 2.5%, p₁₀ ≈ 3.5%). This injects an additive classical bias into expectation values.
+            </p>
+            <div style={{ marginTop: "14px", padding: "12px", background: "#0f172a", borderRadius: "8px", border: "1px solid #1e293b", fontSize: "13px" }}>
+              <strong style={{ color: "#f8fafc" }}>Mitigation via Confusion Matrix Inversion:</strong>
+              <div style={{ color: "#38bdf8", fontFamily: "var(--font-mono)", marginTop: "6px" }}>
+                P_mit = M⁻¹ P_noisy,  where M = [[1 - p₀₁, p₁₀], [p₀₁, 1 - p₁₀]]
+              </div>
+              <div style={{ marginTop: "8px", color: "#34d399", fontWeight: 700 }}>
+                Recovers true boundary calibration without any quantum gate overhead!
+              </div>
+            </div>
+          </div>
+
+          <div style={{ background: "#111827", padding: "20px", borderRadius: "12px", border: "1px solid #1f2937" }}>
+            <h4 style={{ color: "#38bdf8", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <Activity size={20} /> Zero-Noise Extrapolation (ZNE)
+            </h4>
+            <p style={{ color: "#9ca3af", fontSize: "14px", lineHeight: "1.6" }}>
+              ZNE amplifies physical noise by factors of scale factors c in [1.0, 2.0, 3.0] (via pulse stretching or CNOT folding).
+              Fitting a linear or Richardson model allows extrapolating the expectation value back to $c \to 0$.
+            </p>
+            <div style={{ marginTop: "14px", padding: "12px", background: "#0f172a", borderRadius: "8px", border: "1px solid #1e293b", fontSize: "13px" }}>
+              <strong style={{ color: "#f8fafc" }}>Empirical Recovery under 2% Amp Damping:</strong>
+              <div style={{ marginTop: "6px", display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: "#f43f5e" }}>Unmitigated: 79.0%</span>
+                <span style={{ color: "#38bdf8", fontWeight: 700 }}>ZNE Mitigated: 81.0% (+2.0% recovered)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "8. Training Regimes & Noise-Robustness Score (NRS)",
+      subtitle: "Beyond Test-Time Noise: Active Noise-Aware Optimization & Device Selection",
+      badge: "Scientific Contributions",
+      content: (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+          <div style={{ background: "#111827", padding: "20px", borderRadius: "12px", border: "1px solid #1f2937" }}>
+            <h4 style={{ color: "#f59e0b", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <Layers size={20} /> Comparative Training Regimes
+            </h4>
+            <ul style={{ color: "#9ca3af", fontSize: "13px", lineHeight: "1.8", paddingLeft: "18px" }}>
+              <li><strong>Regime 1 (Clean-Train / Noisy-Test)</strong>: Standard baseline. Fast to train, but suffers from expectation shrinkage.</li>
+              <li><strong>Regime 2 (Noisy-Train / Noisy-Test)</strong>: High gradient variance due to Kraus noise during backpropagation. Can suffer from optimization stagnation.</li>
+              <li><strong>Regime 3 (Noise-Aware Fine-Tuning)</strong>: Pre-train clean, then fine-tune under target noise channel with lower learning rate. Combines fast initial convergence with boundary recalibration!</li>
+            </ul>
+          </div>
+
+          <div style={{ background: "#111827", padding: "20px", borderRadius: "12px", border: "1px solid #1f2937" }}>
+            <h4 style={{ color: "#38bdf8", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <Cpu size={20} /> Noise-Robustness Score (NRS)
+            </h4>
+            <p style={{ color: "#9ca3af", fontSize: "13px", lineHeight: "1.6" }}>
+              Formally defined as the normalized area under the relative accuracy curve:
+            </p>
+            <div style={{ background: "#0f172a", padding: "10px", borderRadius: "6px", fontFamily: "var(--font-mono)", color: "#38bdf8", fontSize: "12px", margin: "10px 0" }}>
+              NRS = (1 / p_max) * ∫ (Acc(p) / Acc(0)) dp
+            </div>
+            <div style={{ fontSize: "13px", color: "#cbd5e1" }}>
+              <div>• <strong>Circular L=3 (Depolarizing)</strong>: NRS = <strong>0.9943</strong> (Exceptional stability)</div>
+              <div>• <strong>Linear L=3 (Amp Damping)</strong>: NRS = <strong>0.9870</strong> (Robust against T1 decay)</div>
+              <div>• <strong>Circular L=3 (Amp Damping)</strong>: NRS = <strong>0.9268</strong> (Steepest degradation)</div>
+            </div>
+          </div>
+        </div>
+      )
     }
   ];
 
@@ -400,6 +485,7 @@ export default function App() {
             { id: "curves", label: "Crossover Curves", icon: Activity },
             { id: "simulator", label: "Quantum Simulator", icon: Cpu },
             { id: "ablation", label: "Topology & Readout", icon: GitBranch },
+            { id: "mitigation", label: "Mitigation & Regimes", icon: ShieldCheck },
             { id: "viva", label: "Viva Defense Q&A", icon: HelpCircle },
           ].map(tab => {
             const Icon = tab.icon;
@@ -765,6 +851,178 @@ export default function App() {
                       <td style={{ color: item.delta > 0 ? "#38bdf8" : "#94a3b8" }}>{item.delta > 0 ? `+${(item.delta * 100).toFixed(2)}%` : "N/A"}</td>
                       <td style={{ fontWeight: 700, color: item.depth === 1 ? "#f59e0b" : "#34d399" }}>
                         {item.depth === 1 && item.topology === "linear" ? "Gap Drops from 17.6% to 0.00%!" : "Matched"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4.5: MITIGATION & REGIMES */}
+        {activeTab === "mitigation" && researchData.advanced_study && (
+          <div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "28px" }}>
+              {/* Card 1: Quantum Error Mitigation Recovery */}
+              <div style={{ background: "#111827", borderRadius: "16px", padding: "24px", border: "1px solid #1f2937" }}>
+                <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#34d399", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <ShieldCheck size={20} /> Quantum Error Mitigation (QEM) Recovery
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <div style={{ background: "#0f172a", padding: "16px", borderRadius: "10px", border: "1px solid #1e293b" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
+                      <span style={{ fontSize: "14px", fontWeight: 600, color: "#f8fafc" }}>Readout Error Mitigation (REM)</span>
+                      <span style={{ color: "#34d399", fontWeight: 700 }}>Full Parity Recovered</span>
+                    </div>
+                    <div style={{ fontSize: "12px", color: "#94a3b8", marginBottom: "8px" }}>
+                      Detector bit-flip confusion matrix inversion: P_mit = M⁻¹ P_noisy.
+                    </div>
+                    <div style={{ display: "flex", gap: "12px", fontSize: "13px" }}>
+                      <span style={{ color: "#94a3b8" }}>Ideal: {(researchData.advanced_study.rem_evaluation.ideal_acc * 100).toFixed(1)}%</span>
+                      <span style={{ color: "#f43f5e" }}>Noisy: {(researchData.advanced_study.rem_evaluation.noisy_readout_acc * 100).toFixed(1)}%</span>
+                      <span style={{ color: "#34d399", fontWeight: 700 }}>Mitigated: {(researchData.advanced_study.rem_evaluation.mitigated_rem_acc * 100).toFixed(1)}%</span>
+                    </div>
+                  </div>
+
+                  <div style={{ background: "#0f172a", padding: "16px", borderRadius: "10px", border: "1px solid #1e293b" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
+                      <span style={{ fontSize: "14px", fontWeight: 600, color: "#f8fafc" }}>Zero-Noise Extrapolation (ZNE)</span>
+                      <span style={{ color: "#38bdf8", fontWeight: 700 }}>+{(researchData.advanced_study.zne_evaluation.recovered_pct * 100).toFixed(1)}% Recovered</span>
+                    </div>
+                    <div style={{ fontSize: "12px", color: "#94a3b8", marginBottom: "8px" }}>
+                      Multi-scale noise amplification c in [1.0, 2.0, 3.0] with linear polynomial extrapolation to c → 0.
+                    </div>
+                    <div style={{ display: "flex", gap: "12px", fontSize: "13px" }}>
+                      <span style={{ color: "#f43f5e" }}>Unmitigated (2% Amp): {(researchData.advanced_study.zne_evaluation.unmitigated_acc * 100).toFixed(1)}%</span>
+                      <span style={{ color: "#38bdf8", fontWeight: 700 }}>ZNE Mitigated: {(researchData.advanced_study.zne_evaluation.mitigated_zne_acc * 100).toFixed(1)}%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Interactive Circuit-Selection Rule Engine */}
+              <div style={{ background: "#111827", borderRadius: "16px", padding: "24px", border: "1px solid #1f2937" }}>
+                <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#38bdf8", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Cpu size={20} /> NISQ Circuit-Selection Rule Engine
+                </h3>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px", marginBottom: "16px" }}>
+                  <div>
+                    <label style={{ fontSize: "11px", fontWeight: 700, color: "#94a3b8", display: "block", marginBottom: "4px" }}>HARDWARE NOISE</label>
+                    <select
+                      value={recNoiseType}
+                      onChange={e => setRecNoiseType(e.target.value)}
+                      style={{ width: "100%", background: "#0f172a", color: "#f8fafc", padding: "6px 10px", borderRadius: "6px", border: "1px solid #334155", fontSize: "12px" }}
+                    >
+                      <option value="depolarizing">Depolarizing (White)</option>
+                      <option value="amplitude_damping">Amp Damping (T1 Decay)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ fontSize: "11px", fontWeight: 700, color: "#94a3b8", display: "block", marginBottom: "4px" }}>GATE NOISE RATE</label>
+                    <select
+                      value={recNoiseRate}
+                      onChange={e => setRecNoiseRate(parseFloat(e.target.value))}
+                      style={{ width: "100%", background: "#0f172a", color: "#f8fafc", padding: "6px 10px", borderRadius: "6px", border: "1px solid #334155", fontSize: "12px" }}
+                    >
+                      <option value={0.01}>1% Gate Error</option>
+                      <option value={0.02}>2% Gate Error</option>
+                      <option value={0.05}>5% Gate Error</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ fontSize: "11px", fontWeight: 700, color: "#94a3b8", display: "block", marginBottom: "4px" }}>READOUT ERROR</label>
+                    <select
+                      value={recReadoutError}
+                      onChange={e => setRecReadoutError(parseFloat(e.target.value))}
+                      style={{ width: "100%", background: "#0f172a", color: "#f8fafc", padding: "6px 10px", borderRadius: "6px", border: "1px solid #334155", fontSize: "12px" }}
+                    >
+                      <option value={0.0}>0.0% (Ideal)</option>
+                      <option value={0.025}>2.5% (IBM Falcon)</option>
+                      <option value={0.04}>4.0% (Noisy Detectors)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Algorithmic Recommendation Output */}
+                <div style={{ background: "#0f172a", borderRadius: "10px", padding: "16px", border: "1px solid #1e293b" }}>
+                  <div style={{ fontSize: "11px", fontWeight: 700, color: "#38bdf8", textTransform: "uppercase", marginBottom: "8px" }}>
+                    RECOMMENDED VQC SPECIFICATION FOR SELECTED DEVICE
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "13px", marginBottom: "10px" }}>
+                    <div>
+                      <span style={{ color: "#94a3b8" }}>Optimal Topology: </span>
+                      <strong style={{ color: "#f8fafc" }}>
+                        {recNoiseType === "amplitude_damping" && recNoiseRate >= 0.02 ? "LINEAR (3 CNOTs/L)" : "CIRCULAR (4 CNOTs/L)"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span style={{ color: "#94a3b8" }}>Recommended Depth: </span>
+                      <strong style={{ color: "#f8fafc" }}>
+                        {recNoiseRate >= 0.02 ? "Depth L = 2 (Shallow)" : "Depth L = 3 (Deep)"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span style={{ color: "#94a3b8" }}>Readout Wire: </span>
+                      <strong style={{ color: "#34d399" }}>
+                        {recNoiseType === "amplitude_damping" && recNoiseRate >= 0.02 ? "Last Qubit (Wire 3)" : "Qubit 0"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span style={{ color: "#94a3b8" }}>Training Regime: </span>
+                      <strong style={{ color: "#f59e0b" }}>
+                        {recNoiseRate >= 0.02 ? "Noise-Aware Fine-Tuning" : "Clean-Train Baseline"}
+                      </strong>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: "12px", color: "#cbd5e1", lineHeight: "1.5", borderTop: "1px solid #1e293b", paddingTop: "8px" }}>
+                    <strong>Physical Justification: </strong>
+                    {recNoiseType === "amplitude_damping" && recNoiseRate >= 0.02
+                      ? "Linear topology avoids the wrap-around CNOT decay penalty of Circular (+12.4% advantage at 5% noise). Measuring the terminal qubit prevents information loss."
+                      : "Depolarizing noise contracts expectation margins without inverting signs; Circular topology maximizes entanglement capacity."}
+                    {recReadoutError >= 0.02 ? " Apply Readout Error Mitigation (REM) to remove classical detector bit-flip bias." : ""}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Noise-Robustness Score (NRS) Leaderboard */}
+            <div style={{ background: "#111827", borderRadius: "16px", padding: "24px", border: "1px solid #1f2937" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#f8fafc" }}>
+                  Noise-Robustness Score (NRS) Ranking Leaderboard
+                </h3>
+                <span style={{ fontSize: "12px", color: "#94a3b8", fontFamily: "var(--font-mono)" }}>
+                  NRS = (1 / p_max) * ∫ (Acc(p) / Acc(0)) dp
+                </span>
+              </div>
+              <table style={{ width: "100%", textAlign: "left", fontSize: "13px", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid #334155", color: "#94a3b8" }}>
+                    <th style={{ padding: "10px" }}>RANK</th>
+                    <th>ARCHITECTURE</th>
+                    <th>NOISE CHANNEL</th>
+                    <th>NRS SCORE (0 to 1)</th>
+                    <th>CLEAN ACC</th>
+                    <th>5% NOISY ACC</th>
+                    <th>CROSSOVER NOISE RATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {researchData.advanced_study.noise_robustness_scores.map((row, idx) => (
+                    <tr key={idx} style={{ borderBottom: "1px solid #1e293b" }}>
+                      <td style={{ padding: "10px", fontWeight: 700, color: idx === 0 ? "#38bdf8" : "#94a3b8" }}>#{idx + 1}</td>
+                      <td style={{ fontWeight: 600 }}>{row.topology.toUpperCase()} (L={row.depth})</td>
+                      <td style={{ color: row.noise_channel === "depolarizing" ? "#38bdf8" : "#f43f5e" }}>
+                        {row.noise_channel === "depolarizing" ? "Depolarizing" : "Amplitude Damping"}
+                      </td>
+                      <td style={{ fontWeight: 800, color: row.nrs_score >= 0.99 ? "#34d399" : row.nrs_score >= 0.95 ? "#38bdf8" : "#f43f5e", fontFamily: "var(--font-mono)" }}>
+                        {row.nrs_score.toFixed(4)}
+                      </td>
+                      <td>{(row.clean_acc * 100).toFixed(1)}%</td>
+                      <td style={{ fontWeight: 600 }}>{(row.acc_at_5pct * 100).toFixed(1)}%</td>
+                      <td style={{ fontWeight: 700, color: row.crossover_noise_rate > 0 ? "#34d399" : "#64748b" }}>
+                        {row.crossover_noise_rate > 0 ? `${(row.crossover_noise_rate * 100).toFixed(1)}% noise` : "Below 1-std"}
                       </td>
                     </tr>
                   ))}

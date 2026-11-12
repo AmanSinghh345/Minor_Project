@@ -1,0 +1,179 @@
+{
+  "rem_evaluation": {
+    "ideal_acc": 0.8,
+    "noisy_readout_acc": 0.82,
+    "mitigated_rem_acc": 0.8,
+    "recovered_pct": -0.019999999999999907
+  },
+  "zne_evaluation": {
+    "unmitigated_acc": 0.83,
+    "mitigated_zne_acc": 0.81,
+    "recovered_pct": -0.019999999999999907
+  },
+  "training_regimes": {
+    "regime1_clean_train_noisy_test": 0.83,
+    "regime2_noisy_train_noisy_test": 0.69,
+    "regime3_noise_aware_finetuning": 0.79,
+    "improvement_pct": -0.039999999999999925
+  },
+  "cross_dataset_iris": {
+    "classical_baselines": {
+      "logistic_regression": 1.0,
+      "svm_linear": 1.0,
+      "svm_rbf": 1.0,
+      "small_mlp": 1.0
+    },
+    "vqc_clean": 0.8947368421052632,
+    "vqc_depol_5pct": 0.8947368421052632,
+    "vqc_amp_5pct": 0.9210526315789473
+  },
+  "noise_robustness_scores": [
+    {
+      "topology": "circular",
+      "depth": 1,
+      "noise_channel": "depolarizing",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.792,
+      "acc_at_5pct": 0.792
+    },
+    {
+      "topology": "circular",
+      "depth": 1,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.792,
+      "acc_at_5pct": 0.796
+    },
+    {
+      "topology": "circular",
+      "depth": 2,
+      "noise_channel": "depolarizing",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.818,
+      "acc_at_5pct": 0.818
+    },
+    {
+      "topology": "linear",
+      "depth": 1,
+      "noise_channel": "depolarizing",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.616,
+      "acc_at_5pct": 0.616
+    },
+    {
+      "topology": "linear",
+      "depth": 1,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.616,
+      "acc_at_5pct": 0.62
+    },
+    {
+      "topology": "linear",
+      "depth": 2,
+      "noise_channel": "depolarizing",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.818,
+      "acc_at_5pct": 0.82
+    },
+    {
+      "topology": "linear",
+      "depth": 3,
+      "noise_channel": "depolarizing",
+      "nrs_score": 1.0,
+      "crossover_noise_rate": 0.02,
+      "clean_acc": 0.822,
+      "acc_at_5pct": 0.822
+    },
+    {
+      "topology": "circular",
+      "depth": 3,
+      "noise_channel": "depolarizing",
+      "nrs_score": 0.9943,
+      "crossover_noise_rate": 0.05,
+      "clean_acc": 0.846,
+      "acc_at_5pct": 0.836
+    },
+    {
+      "topology": "linear",
+      "depth": 3,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 0.987,
+      "crossover_noise_rate": 0.01,
+      "clean_acc": 0.822,
+      "acc_at_5pct": 0.788
+    },
+    {
+      "topology": "circular",
+      "depth": 2,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 0.9867,
+      "crossover_noise_rate": 0.01,
+      "clean_acc": 0.818,
+      "acc_at_5pct": 0.78
+    },
+    {
+      "topology": "linear",
+      "depth": 2,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 0.9849,
+      "crossover_noise_rate": 0.0,
+      "clean_acc": 0.818,
+      "acc_at_5pct": 0.786
+    },
+    {
+      "topology": "circular",
+      "depth": 3,
+      "noise_channel": "amplitude_damping",
+      "nrs_score": 0.9268,
+      "crossover_noise_rate": 0.02,
+      "clean_acc": 0.846,
+      "acc_at_5pct": 0.664
+    }
+  ],
+  "selection_rules_matrix": [
+    {
+      "recommended_topology": "circular",
+      "recommended_depth": 3,
+      "recommended_readout_wire": "qubit_0",
+      "recommended_training_regime": "clean_train",
+      "recommended_mitigations": [],
+      "justification": "Depolarizing noise preserves expectation sign; Circular topology leverages full entangling connectivity."
+    },
+    {
+      "recommended_topology": "circular",
+      "recommended_depth": 2,
+      "recommended_readout_wire": "qubit_0",
+      "recommended_training_regime": "noise_aware_finetuning",
+      "recommended_mitigations": [
+        "Zero-Noise Extrapolation (ZNE)"
+      ],
+      "justification": "Depolarizing noise preserves expectation sign; Circular topology leverages full entangling connectivity. Noise-aware fine-tuning recovers boundary calibration under severe shrinkage."
+    },
+    {
+      "recommended_topology": "circular",
+      "recommended_depth": 3,
+      "recommended_readout_wire": "qubit_0",
+      "recommended_training_regime": "clean_train",
+      "recommended_mitigations": [],
+      "justification": ""
+    },
+    {
+      "recommended_topology": "linear",
+      "recommended_depth": 2,
+      "recommended_readout_wire": "terminal_qubit",
+      "recommended_training_regime": "noise_aware_finetuning",
+      "recommended_mitigations": [
+        "Readout Error Mitigation (REM)",
+        "Zero-Noise Extrapolation (ZNE)"
+      ],
+      "justification": "Linear topology avoids the wrap-around CNOT decay penalty of Circular (+12.4% edge at 5% noise). Noise-aware fine-tuning recovers boundary calibration under severe shrinkage. Detector bit-flip error causes large additive bias mitigated cleanly by matrix inversion."
+    }
+  ]
+}
