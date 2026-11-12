@@ -289,6 +289,13 @@ def export_dashboard_data():
             dst.write(src.read())
         print("  Copied multi-model benchmark results to dashboard/public/data/multi_model.json")
 
+    # Copy IBM hardware benchmark results if available
+    hardware_res_path = "results/ibm_hardware_benchmark_results.json"
+    if os.path.exists(hardware_res_path):
+        with open(hardware_res_path, "r") as src, open("dashboard/public/data/hardware_benchmark.json", "w") as dst:
+            dst.write(src.read())
+        print("  Copied IBM hardware benchmark results to dashboard/public/data/hardware_benchmark.json")
+
     print("\n" + "=" * 70)
     print("STEP 1 COMPLETE: DASHBOARD EXPORT SUCCESSFUL!")
     print("=" * 70)

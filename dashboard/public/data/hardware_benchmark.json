@@ -1,0 +1,314 @@
+{
+  "metadata": {
+    "date": "2026-11-12 23:23:00",
+    "dataset": "PneumoniaMNIST (4 PCA)",
+    "n_test_samples": 100,
+    "layers": 2,
+    "trained_checkpoint_seed": 42,
+    "ideal_accuracy": 0.76
+  },
+  "devices": {
+    "ideal_baseline": {
+      "device_name": "Ideal Statevector Simulator",
+      "t1_us": 1000000000.0,
+      "t2_us": 1000000000.0,
+      "cnot_error": 0.0,
+      "readout_p01": 0.0,
+      "readout_p10": 0.0,
+      "evaluations": [
+        {
+          "label": "Ideal Reference",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 6,
+          "accuracy": 0.76,
+          "precision": 0.7241379310344828,
+          "recall": 0.84,
+          "f1": 0.7777777777777778,
+          "mean_prob_drift": 0.0
+        }
+      ]
+    },
+    "ibm_eagle": {
+      "device_name": "IBM Eagle (127-qubit Eagle r3)",
+      "t1_us": 285.0,
+      "t2_us": 135.0,
+      "cnot_error": 0.0058,
+      "readout_p01": 0.011,
+      "readout_p10": 0.016,
+      "evaluations": [
+        {
+          "label": "Linear Native (Raw)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 6,
+          "accuracy": 0.77,
+          "precision": 0.7368421052631579,
+          "recall": 0.84,
+          "f1": 0.7850467289719626,
+          "mean_prob_drift": 0.007476540024732512
+        },
+        {
+          "label": "Linear Native (REM Mitigated)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": true,
+          "total_effective_cnots": 6,
+          "accuracy": 0.76,
+          "precision": 0.7241379310344828,
+          "recall": 0.84,
+          "f1": 0.7777777777777778,
+          "mean_prob_drift": 0.002940634759460996
+        },
+        {
+          "label": "Circular (Unrouted)",
+          "topology": "circular",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 8,
+          "accuracy": 0.82,
+          "precision": 0.82,
+          "recall": 0.82,
+          "f1": 0.82,
+          "mean_prob_drift": 0.058324038045750794
+        },
+        {
+          "label": "Circular (SWAP Routed Raw)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": false,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.26577155420210974
+        },
+        {
+          "label": "Circular (SWAP Routed REM)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": true,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.2694451647303184
+        }
+      ]
+    },
+    "ibm_perth": {
+      "device_name": "IBM Perth (7-qubit Falcon r5)",
+      "t1_us": 180.5,
+      "t2_us": 112.4,
+      "cnot_error": 0.0075,
+      "readout_p01": 0.015,
+      "readout_p10": 0.021,
+      "evaluations": [
+        {
+          "label": "Linear Native (Raw)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 6,
+          "accuracy": 0.77,
+          "precision": 0.7368421052631579,
+          "recall": 0.84,
+          "f1": 0.7850467289719626,
+          "mean_prob_drift": 0.009821927534914572
+        },
+        {
+          "label": "Linear Native (REM Mitigated)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": true,
+          "total_effective_cnots": 6,
+          "accuracy": 0.76,
+          "precision": 0.7241379310344828,
+          "recall": 0.84,
+          "f1": 0.7777777777777778,
+          "mean_prob_drift": 0.00393526553681675
+        },
+        {
+          "label": "Circular (Unrouted)",
+          "topology": "circular",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 8,
+          "accuracy": 0.82,
+          "precision": 0.82,
+          "recall": 0.82,
+          "f1": 0.82,
+          "mean_prob_drift": 0.05891874710989813
+        },
+        {
+          "label": "Circular (SWAP Routed Raw)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": false,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.24859724586455034
+        },
+        {
+          "label": "Circular (SWAP Routed REM)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": true,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.2529357272503167
+        }
+      ]
+    },
+    "ibm_manila": {
+      "device_name": "IBM Manila (5-qubit Falcon r5)",
+      "t1_us": 154.2,
+      "t2_us": 63.8,
+      "cnot_error": 0.0084,
+      "readout_p01": 0.018,
+      "readout_p10": 0.026,
+      "evaluations": [
+        {
+          "label": "Linear Native (Raw)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 6,
+          "accuracy": 0.78,
+          "precision": 0.75,
+          "recall": 0.84,
+          "f1": 0.7924528301886793,
+          "mean_prob_drift": 0.0118815358186845
+        },
+        {
+          "label": "Linear Native (REM Mitigated)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": true,
+          "total_effective_cnots": 6,
+          "accuracy": 0.76,
+          "precision": 0.7241379310344828,
+          "recall": 0.84,
+          "f1": 0.7777777777777778,
+          "mean_prob_drift": 0.00455998070844318
+        },
+        {
+          "label": "Circular (Unrouted)",
+          "topology": "circular",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 8,
+          "accuracy": 0.82,
+          "precision": 0.82,
+          "recall": 0.82,
+          "f1": 0.82,
+          "mean_prob_drift": 0.06002138643457818
+        },
+        {
+          "label": "Circular (SWAP Routed Raw)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": false,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.24084713467108262
+        },
+        {
+          "label": "Circular (SWAP Routed REM)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": true,
+          "total_effective_cnots": 32,
+          "accuracy": 0.52,
+          "precision": 1.0,
+          "recall": 0.04,
+          "f1": 0.07692307692307693,
+          "mean_prob_drift": 0.24513303720287805
+        }
+      ]
+    },
+    "ibm_bogota": {
+      "device_name": "IBM Bogota (5-qubit Falcon r4)",
+      "t1_us": 102.5,
+      "t2_us": 88.1,
+      "cnot_error": 0.0121,
+      "readout_p01": 0.022,
+      "readout_p10": 0.034,
+      "evaluations": [
+        {
+          "label": "Linear Native (Raw)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 6,
+          "accuracy": 0.77,
+          "precision": 0.7454545454545455,
+          "recall": 0.82,
+          "f1": 0.780952380952381,
+          "mean_prob_drift": 0.016075135249589766
+        },
+        {
+          "label": "Linear Native (REM Mitigated)",
+          "topology": "linear",
+          "transpile_routing": false,
+          "readout_mitigation": true,
+          "total_effective_cnots": 6,
+          "accuracy": 0.76,
+          "precision": 0.7241379310344828,
+          "recall": 0.84,
+          "f1": 0.7777777777777778,
+          "mean_prob_drift": 0.006361625916333716
+        },
+        {
+          "label": "Circular (Unrouted)",
+          "topology": "circular",
+          "transpile_routing": false,
+          "readout_mitigation": false,
+          "total_effective_cnots": 8,
+          "accuracy": 0.82,
+          "precision": 0.82,
+          "recall": 0.82,
+          "f1": 0.82,
+          "mean_prob_drift": 0.06331366583169067
+        },
+        {
+          "label": "Circular (SWAP Routed Raw)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": false,
+          "total_effective_cnots": 32,
+          "accuracy": 0.51,
+          "precision": 1.0,
+          "recall": 0.02,
+          "f1": 0.0392156862745098,
+          "mean_prob_drift": 0.2161265862270215
+        },
+        {
+          "label": "Circular (SWAP Routed REM)",
+          "topology": "circular",
+          "transpile_routing": true,
+          "readout_mitigation": true,
+          "total_effective_cnots": 32,
+          "accuracy": 0.51,
+          "precision": 1.0,
+          "recall": 0.02,
+          "f1": 0.0392156862745098,
+          "mean_prob_drift": 0.2191264810751251
+        }
+      ]
+    }
+  }
+}

@@ -61,6 +61,24 @@ PRESET_PROFILES: Dict[str, HardwareNoiseProfile] = {
         readout_error_p01=0.022,
         readout_error_p10=0.034
     ),
+    "ibm_perth": HardwareNoiseProfile(
+        name="IBM Perth (7-qubit Falcon r5)",
+        t1_us=180.5,
+        t2_us=112.4,
+        single_qubit_gate_error=0.00024,
+        two_qubit_cnot_error=0.0075,
+        readout_error_p01=0.015,
+        readout_error_p10=0.021
+    ),
+    "ibm_eagle": HardwareNoiseProfile(
+        name="IBM Eagle (127-qubit Eagle r3)",
+        t1_us=285.0,
+        t2_us=135.0,
+        single_qubit_gate_error=0.00019,
+        two_qubit_cnot_error=0.0058,
+        readout_error_p01=0.011,
+        readout_error_p10=0.016
+    ),
     "ideal_baseline": HardwareNoiseProfile(
         name="Ideal Statevector Simulator",
         t1_us=1e9,
