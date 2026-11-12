@@ -282,6 +282,13 @@ def export_dashboard_data():
         json.dump(predictions_payload, f, indent=2)
     print("  Saved dashboard/public/data/predictions.json")
 
+    # Copy multi-model benchmark results if available
+    multi_model_res_path = "results/multi_model_benchmark_results.json"
+    if os.path.exists(multi_model_res_path):
+        with open(multi_model_res_path, "r") as src, open("dashboard/public/data/multi_model.json", "w") as dst:
+            dst.write(src.read())
+        print("  Copied multi-model benchmark results to dashboard/public/data/multi_model.json")
+
     print("\n" + "=" * 70)
     print("STEP 1 COMPLETE: DASHBOARD EXPORT SUCCESSFUL!")
     print("=" * 70)

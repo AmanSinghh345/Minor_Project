@@ -1,11 +1,18 @@
 """
-Classical benchmark models: Logistic Regression, Small MLP, and SVM.
+Comprehensive Classical Benchmark Suite:
+1. Logistic Regression (Convex Linear)
+2. Support Vector Machine - Linear Kernel
+3. Support Vector Machine - Non-linear RBF Kernel
+4. Random Forest Classifier (50 Decision Trees)
+5. Gradient Boosting Classifier
+6. Small MLP (4-8-1, 49 Parameters)
 """
 
 from typing import Dict, Any
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -32,7 +39,7 @@ class SmallMLP(nn.Module):
         return x
 
 
-def evaluate_classical_models(
+def evaluate_classical_suite(
     X_train: np.ndarray,
     y_train: np.ndarray,
     X_test: np.ndarray,
@@ -40,7 +47,7 @@ def evaluate_classical_models(
     seed: int = 42
 ) -> Dict[str, float]:
     """
-    Trains and evaluates Logistic Regression, Linear SVM, RBF SVM, and Small MLP.
+    Evaluates 6 classical models covering linear, margin-based, kernel, ensemble, and neural network paradigms.
     Returns test accuracies.
     """
     results = {}
@@ -60,7 +67,17 @@ def evaluate_classical_models(
     svm_rbf.fit(X_train, y_train)
     results["svm_rbf"] = float(svm_rbf.score(X_test, y_test))
 
-    # 4. Small MLP
+    # 4. Random Forest (50 Trees)
+    rf = RandomForestClassifier(n_estimators=50, random_state=seed)
+    rf.fit(X_train, y_train)
+    results["random_forest"] = float(rf.score(X_test, y_test))
+
+    # 5. Gradient Boosting
+    gb = GradientBoostingClassifier(n_estimators=50, random_state=seed)
+    gb.fit(X_train, y_train)
+    results["gradient_boosting"] = float(gb.score(X_test, y_test))
+
+    # 6. Small MLP (4-8-1)
     torch.manual_seed(seed)
     mlp = SmallMLP()
     criterion = nn.BCEWithLogitsLoss()
@@ -85,3 +102,5 @@ def evaluate_classical_models(
         results["small_mlp"] = float(np.mean(preds == y_test))
         
     return results
+
+evaluate_classical_models = evaluate_classical_suite

@@ -1,0 +1,42 @@
+{
+  "classical_benchmarks": {
+    "pneumonia_mnist": {
+      "logistic_regression": 0.82,
+      "svm_linear": 0.82,
+      "svm_rbf": 0.83,
+      "random_forest": 0.77,
+      "gradient_boosting": 0.78,
+      "small_mlp": 0.81
+    },
+    "breast_cancer_wisconsin": {
+      "logistic_regression": 0.958041958041958,
+      "svm_linear": 0.951048951048951,
+      "svm_rbf": 0.951048951048951,
+      "random_forest": 0.951048951048951,
+      "gradient_boosting": 0.951048951048951,
+      "small_mlp": 0.958041958041958
+    }
+  },
+  "quantum_paradigms_noise_sweep": {
+    "Clean": {
+      "standard_vqc": 0.8,
+      "data_reuploading_vqc": 0.81,
+      "quantum_kernel_qsvc": 0.86
+    },
+    "2% Amp Damping": {
+      "standard_vqc": 0.83,
+      "data_reuploading_vqc": 0.81,
+      "quantum_kernel_qsvc": 0.82
+    },
+    "5% Amp Damping": {
+      "standard_vqc": 0.73,
+      "data_reuploading_vqc": 0.74,
+      "quantum_kernel_qsvc": 0.82
+    },
+    "5% Depolarizing": {
+      "standard_vqc": 0.8,
+      "data_reuploading_vqc": 0.82,
+      "quantum_kernel_qsvc": 0.82
+    }
+  }
+}
