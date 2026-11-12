@@ -111,20 +111,27 @@ def create_presentation():
     # Guided By
     gbox = slide1.shapes.add_textbox(Inches(0.8), Inches(3.8), Inches(7.5), Inches(0.6))
     gp = gbox.text_frame.paragraphs[0]
-    gp.text = "GUIDED BY: PROF. (DR.) SUDHAKAR PANDEY"
+    gp.text = "GUIDED BY: DR. KAPIL KUMAR SONI"
     gp.font.name = "Arial"
     gp.font.size = Pt(15)
     gp.font.bold = True
     gp.font.color.rgb = RGBColor(51, 65, 85)
 
     # Presented By
-    pbox = slide1.shapes.add_textbox(Inches(0.8), Inches(5.0), Inches(8.5), Inches(1.2))
+    pbox = slide1.shapes.add_textbox(Inches(0.8), Inches(4.8), Inches(8.5), Inches(1.5))
     ptf = pbox.text_frame
     pp1 = ptf.paragraphs[0]
-    pp1.text = "Presented By:    Aman Singh\n                      Minor Project Group (Semester 7)"
+    pp1.text = "Presented By:    Aditya Soni (23118004)"
     pp1.font.name = "Arial"
     pp1.font.size = Pt(14)
     pp1.font.color.rgb = RGBColor(30, 41, 59)
+
+    pp2 = ptf.add_paragraph()
+    pp2.text = "                 Aman Singh (23118008)"
+    pp2.font.name = "Arial"
+    pp2.font.size = Pt(14)
+    pp2.font.color.rgb = RGBColor(30, 41, 59)
+    pp2.space_before = Pt(4)
 
     # =========================================================================
     # SLIDE 2: INTRODUCTION
